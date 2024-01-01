@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Cart</title>
+    <style>
+        /* Add any additional styles for better UI */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        a {
+            text-decoration: none;
+            color: #007bff;
+        }
+
+        .cart-item {
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            padding: 10px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+
+        .cart-item img {
+            max-width: 100px;
+            margin-right: 10px;
+        }
+
+        .cart-item-details {
+            flex-grow: 1;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .quantity-controls{
+            display:flex;
+        }
+
+        .quantity-controls button {
+            background-color: #28a745;
+            color: #fff;
+            padding: 5px 10px;
+            border: none;
+            cursor: pointer;
+        }
+
+        .quantity-controls button:hover {
+            background-color: #218838;
+        }
+
+        .remove-button {
+            background-color: #dc3545;
+            color: #fff;
+            padding: 5px 10px;
+            border: none;
+            cursor: pointer;
+        }
+
+        .remove-button:hover {
+            background-color: #c82333;
+        }
+
+        .update-address-button {
+            background-color: #007bff;
+            color: #fff;
+            padding: 5px 10px;
+            border: none;
+            cursor: pointer;
+        }
+
+        .update-address-button:hover {
+            background-color: #0056b3;
+        }
+
+        p {
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>Your Cart</h1>
+    <a href="{% url 'home' %}">Home</a>
+
+    <!-- Display User's Address -->
+    {% with address=user.address %}
+        {% if address %}
+            <div class="user-address">
+                <h2>User Address</h2>
+                <p>{{ address.street_address }}, {{ address.city }}, {{ address.state }} - {{ address.zip_code }}</p>
+                <button class="update-address-button" onclick="location.href='{% url 'update_address' %}'">Update Address</button>
+            </div>
+        {% endif %}
+    {% endwith %}
+
+    {% for item in cart_items %}
+        <div class="cart-item">
+            <img src="{{ item.product.image.url }}" alt="{{ item.product.name }}">
+            <div class="cart-item-details">
+                <div>
+                    <p>{{ item.product.name }}</p>
+                    <p>Price: ${{ item.product.price }}</p>
+                </div>
+                <div class="quantity-controls">
+                    <form action="{% url 'update_quantity' item.id 'decrease' %}" method="post">
+                        {% csrf_token %}
+                        <button type="submit">-</button>
+                    </form>
+                    <span>{{ item.quantity }}</span>
+                    <form action="{% url 'update_quantity' item.id 'increase' %}" method="post">
+                        {% csrf_token %}
+                        <button type="submit">+</button>
+                    </form>
+                </div>
+                <form action="{% url 'remove_from_cart' item.id %}" method="post">
+                    {% csrf_token %}
+                    <button class="remove-button" type="submit">Remove</button>
+                </form>
+            </div>
+        </div>
+    {% endfor %}
+
+    <p>Total Cost: ${{ total_cost }}</p>
+
+    <!-- Add Buy Now button with a form for user interaction -->
+    <form action="{% url 'initiate_payment' %}" method="post">
+        {% csrf_token %}
+        <button type="submit">Pay Now</button>
+    </form>
+</body>
+</html>

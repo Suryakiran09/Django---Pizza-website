@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment</title>
+    <!-- Include Razorpay checkout.js -->
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+</head>
+<body>
+    <h1>Payment</h1>
+    <!-- Display payment form -->
+    <form action="{% url 'handle_payment_success' %}" method="post">
+        {% csrf_token %}
+        <script
+            src="https://checkout.razorpay.com/v1/checkout.js"
+            data-key="rzp_test_t9uknc2io8QnuI"
+            data-amount="{{ order.total_amount|floatformat:2|floatformat:-2 }}"
+            data-currency="INR"
+            data-order_id="{{ order.razorpay_order_id }}"
+            data-buttontext="Pay Now"
+            data-name="Your Company Name"
+            data-description="Order payment"
+            data-image="https://example.com/your_logo"
+            data-prefill.name="{{ request.user.first_name }}"
+            data-prefill.email="{{ request.user.email }}"
+            data-theme.color="#3399cc"
+        ></script>
+    </form>
+</body>
+</html>

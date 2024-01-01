@@ -1,0 +1,116 @@
+body{
+    position: relative;
+    margin:0px;
+    background-color: rgba(34, 120, 211, 0.263);
+
+}
+
+nav{
+    position: relative;
+    height: 8vh;
+    width:100%;
+    background-color: white;
+    display: flex;
+    justify-content: space-between;
+    z-index: 100;
+}
+
+nav h1{
+    font-size: 3rem;
+    padding-left: 90px;
+    margin-top: 15px;
+}
+
+.nav-items{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding-right: 70px;
+}
+
+.nav-items h3{
+    padding-right: 100px;
+    font-size: 2rem;
+}
+
+.nav-items a{
+    padding-right: 30px;
+}
+
+.nav-items a p{
+    display: none;
+}
+
+.grid{
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(3,clamp(250px,500px,700px));
+    margin: 50px 200px;
+}
+
+.grid-items{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 40px;
+    border: 1px solid black;
+    margin-right: 50px;
+    overflow: hidden;
+    margin: 30px;
+    height: 400px;
+    transition: all 1s;
+}
+
+.grid-items:hover{
+    height: 450px;
+}
+
+.grid-items:hover .atc{
+    position: relative;
+    display: flex;
+    height: 100%;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    border-top:1px solid black
+}
+
+.grid-items .product-image{
+    position: relative;
+    width: 100%;
+    height:300px;
+    border: 1px solid red;
+}
+
+.grid-items .product-image img{
+    height: 300px;
+    width: 100%;
+    object-fit:cover;
+}
+
+.grid-items h3{
+    font-size: 1.5rem;
+    margin:0px;
+    margin-top: 10px;
+}
+
+.grid-items p{
+    font-size: 1rem;
+    margin: 0px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.grid-items .atc{
+    display: none;
+}
+
+.grid-items .atc a{
+    position: relative;
+    height: 50%;
+    width: 100%;
+    color: black;
+    text-decoration: none;
+    text-align: center;
+}
