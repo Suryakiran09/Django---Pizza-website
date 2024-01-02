@@ -154,7 +154,7 @@ client = razorpay.Client(auth=("rzp_test_t9uknc2io8QnuI", "OOCypKPUSQB2YUJeWb6QX
 
 
 # Initialize Razorpay client
-client = razorpay.Client(auth=("rzp_test_t9uknc2io8QnuI", "OOCypKPUSQB2YUJeWb6QXvSC"))
+client = razorpay.Client(auth=("", ""))
 
 @csrf_exempt
 @login_required(login_url='login')
