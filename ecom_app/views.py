@@ -150,8 +150,6 @@ def update_address(request):
 
     return render(request, 'update_address.html', {'form': form})
 
-client = razorpay.Client(auth=("rzp_test_t9uknc2io8QnuI", "OOCypKPUSQB2YUJeWb6QXvSC"))
-
 
 # Initialize Razorpay client
 client = razorpay.Client(auth=("", ""))
